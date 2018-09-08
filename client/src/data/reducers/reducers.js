@@ -9,7 +9,7 @@ export const deafultReducer = (state = {}, action) => {
                 id: action.payload.id,
                 name: action.payload.name
             })
-        case actiontypes.BEING_HTTP_REQ:
+        case actiontypes.BEGIN_HTTP_REQ:
             l("start api call")
             return state
         case actiontypes.END_HTTP_REQ:

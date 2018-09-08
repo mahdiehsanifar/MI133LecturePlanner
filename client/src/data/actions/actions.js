@@ -12,7 +12,7 @@ export const test = (test) => {
 
 export const beginHttpReq = () => {
     return {
-        type: actiontypes.BEING_HTTP_REQ
+        type: actiontypes.BEGIN_HTTP_REQ
     }
 }
 export const endHttpReq = () => {

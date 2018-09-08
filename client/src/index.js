@@ -14,7 +14,7 @@ import BaseLayout from './component/baselayout/baselayout';
 const defaultStore = store
 const main = <Provider store={defaultStore}>
     <Router>
-        <div className="container">
+        <div className="container">        
             <BaseLayout exact path="/" component={home} />
             <Route path="/login" component={login} />
         </div>

@@ -1,6 +1,5 @@
+import { store } from '../data/store';
 export const isAuthenticated = () => {
-    return true
+    const token = store.getState().profile.token
+    return (token === undefined || token === '') ? false : true    
 }
-
-
-

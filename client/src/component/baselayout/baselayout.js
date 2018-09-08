@@ -1,16 +1,26 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom';
 import NavigationBar from "../NavigationBar/NavigationBar";
+import { isAuthenticated } from '../../utility/auth';
 
 const BaseLayout = ({ component: Component, ...rest }) => {
     return (
-        <Route {...rest} render={matchProps => (
+        <Route {...rest} render={props => (
+            isAuthenticated() === true
+            ?
             <div>
                 <NavigationBar />
-                <Component {...matchProps} />
+                <Component {...props} />
             </div>
+            :
+            <Redirect to={{
+                pathname: '/login',
+                state: { from: props.location }
+            }} />
         )} />
     )
 };
 
 export default BaseLayout;
+
+
