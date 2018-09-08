@@ -29,7 +29,7 @@ export const errorHttpReq = () => {
     }
 }
 
-export const loginApi = (email, password, history) => {
+export const loginApi = (email, password, extra) => {
     return ds => {
         const model = {
             email: email,
@@ -40,8 +40,8 @@ export const loginApi = (email, password, history) => {
             .then(response => {
                 ds(updateLoginInfo(response.data))
                 ds(endHttpReq())
-                console.log(history)
-                history.push('/')
+                
+                extra()
             })
             .catch(error => {
                 ds(errorHttpReq())
@@ -51,7 +51,7 @@ export const loginApi = (email, password, history) => {
 
     }
 }
-export const registerApi = (email, password, history) => {
+export const registerApi = (email, password, extra) => {
     return ds => {
         const model = {
             email: email,
@@ -63,7 +63,7 @@ export const registerApi = (email, password, history) => {
                 //ds(updateLoginInfo(response.data))
                 ds(endHttpReq())
                 if (response.status == 201) {
-                    history.push('/login')
+                    extra()
                 }
             })
             .catch(error => {
