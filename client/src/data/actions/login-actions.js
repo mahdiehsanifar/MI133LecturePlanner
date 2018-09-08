@@ -1,7 +1,7 @@
 import * as actiontypes from "./action-types"
 
 import axios from 'axios'
-import { LOGIN_PATH } from '../../utility/endpoints';
+import { LOGIN_PATH, REGISTER_PATH } from '../../utility/endpoints';
 
 
 
@@ -34,11 +34,11 @@ export const loginApi = (email, password, history) => {
         const model = {
             email: email,
             password: password
-        }        
+        }
         ds(beginHttpReq())
         axios.post(LOGIN_PATH, model)
-            .then(response => {                
-                ds(updateLoginInfo(response.data))                
+            .then(response => {
+                ds(updateLoginInfo(response.data))
                 ds(endHttpReq())
                 console.log(history)
                 history.push('/')
@@ -48,6 +48,29 @@ export const loginApi = (email, password, history) => {
                 ds(endHttpReq())
                 console.log(error)
             })
-        
+
+    }
+}
+export const registerApi = (email, password, history) => {
+    return ds => {
+        const model = {
+            email: email,
+            password: password
+        }
+        ds(beginHttpReq())
+        axios.post(REGISTER_PATH, model)
+            .then(response => {
+                //ds(updateLoginInfo(response.data))
+                ds(endHttpReq())
+                if (response.status == 201) {
+                    history.push('/login')
+                }
+            })
+            .catch(error => {
+                ds(errorHttpReq())
+                ds(endHttpReq())
+                console.log(error)
+            })
+
     }
 }
