@@ -1,7 +1,7 @@
 import * as actiontypes from "./action-types"
 
 import axios from 'axios'
-import { LOGIN_PATH, REGISTER_PATH, PROFILE_PATH } from '../../utility/endpoints';
+import { LOGIN_PATH, REGISTER_PATH, PROFILE_PATH, COURSE_PATH } from '../../utility/endpoints';
 
 
 
@@ -22,6 +22,12 @@ export const updateProfileInfo = (payload) => {
 export const beginHttpReq = () => {
     return {
         type: actiontypes.LOGIN_BEGIN_HTTP_REQ
+    }
+}
+export const updateCoursesInfo = (payload) => {
+    return {
+        type: actiontypes.PROFILE_COURSES_INFO,
+        payload: payload
     }
 }
 export const endHttpReq = () => {
@@ -129,5 +135,26 @@ export const profileUpdateApi = (profile, extra) => {
     }
 }
 
+
+
+
+export const getCoursesApi = () => {
+    return ds => {
+        ds(beginHttpReq())
+        axios.get(COURSE_PATH)
+            .then(response => {                
+                ds(endHttpReq())                
+                if (response.status == 200) {
+                    ds(updateCoursesInfo(response.data.data))
+                }
+            })
+            .catch(error => {
+                ds(errorHttpReq())
+                ds(endHttpReq())
+                console.log(error)
+            })
+
+    }
+}
 
 //profileUpdate

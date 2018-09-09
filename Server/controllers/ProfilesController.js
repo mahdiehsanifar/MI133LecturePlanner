@@ -8,13 +8,20 @@ module.exports = app => {
     const repo = app.repositories.sql.ProfileRepository;
     const validator = app.models.viewmodels.profile.ProfileValidationViewModel;
 
-    app.route("/profiles/address/status")
+    app.route("/profile/courses")
         .all(app.xticate.authenticate())
         .get((req, res) => {
-            repo.isAddressComplete(req.user.id, result => {
-                return res.json({ status: result });
-            })
-        })
+            var apiAddress = "http://localhost:8990";
+            ax.get(apiAddress)
+                .then(function (data) {
+                    console.log(data)
+                    return res.json( { data: data.data.Groups });
+                })
+                .catch(function (error) {
+                    return res.json(error)
+                });
+        });
+
 
     app.route("/profiles")
         .all(app.xticate.authenticate())
@@ -33,39 +40,37 @@ module.exports = app => {
                     errors.response;
                 } else {
                     var model = req.body;
-                    var apiAddress = "https://maps.googleapis.com/maps/api/geocode/json?"
-                    var parametrizedUrl = apiAddress + `address=${model.houseno}+${model.street},${model.city}+${model.postalcode}`
-                    var urlWithKey = parametrizedUrl + "&key=AIzaSyARaziDR-I66CNvCw9l3ck_JSWd0HJDsyE"
-                    console.log(urlWithKey);
-                    ax.get(urlWithKey)
-                        .then(function(data) {
-                            if (data.data.results[0] != null) {
-                                console.log(data.data.results[0].geometry.location)
-                                repo.update({
-                                    firstname: model.firstname,
-                                    lastname: model.lastname,
-                                    street: model.street,
-                                    houseno: model.houseno,
-                                    state: model.state,
-                                    city: model.city,
-                                    postalcode: model.postalcode,
-                                    phone: model.phone,
-                                    lat: data.data.results[0].geometry.location.lat,
-                                    long: data.data.results[0].geometry.location.lng
-                                }, req.user.id, result => {
-                                    res.json({ profile: result });
-                                });
-                            } else {
-                                res.status(422).send();
-                            }
+                    //var apiAddress = "https://maps.googleapis.com/maps/api/geocode/json?"
+                    //var parametrizedUrl = apiAddress + `address=${model.houseno}+${model.street},${model.city}+${model.postalcode}`
+                    //var urlWithKey = parametrizedUrl + "&key=AIzaSyARaziDR-I66CNvCw9l3ck_JSWd0HJDsyE"
+                    //console.log(urlWithKey);
+                    //ax.get(urlWithKey)
+                    //  .then(function(data) {
+                    //    if (data.data.results[0] != null) {
+                    //      console.log(data.data.results[0].geometry.location)
+                    repo.update({
+                        firstname: model.firstname,
+                        lastname: model.lastname,
+                        //street: model.street,
+                        //houseno: model.houseno,
+                        //state: model.state,
+                        city: model.city,
+                        postalcode: model.postalcode,
+                        phone: model.phone
+                    }, req.user.id, result => {
+                        res.json({ profile: result });
+                    });
+                    // } else {
+                    //     res.status(422).send();
+                    // }
 
-                        })
-                        .catch(function(error) {
-                            res.status(422).send();
-                        })
-                        // repo.update(model, req.user.id, result => {
-                        //     res.json({ profile: result });
-                        // });
+                    // })
+                    // .catch(function(error) {
+                    //     res.status(422).send();
+                    // })
+                    // repo.update(model, req.user.id, result => {
+                    //     res.json({ profile: result });
+                    // });
                 }
             });
 }

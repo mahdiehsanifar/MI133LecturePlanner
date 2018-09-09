@@ -22,7 +22,7 @@ class NavigationBar extends Component {
                             <Link className="btn btn-lg btn-primary btn-block" to={"/profile"}>Profile</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Link</a>
+                            <Link className="btn btn-lg btn-primary btn-block" to={"/profile/courses"}>Courses</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -13,12 +13,14 @@ import './component/NavigationBar/NavigationBar.css';
 import BaseLayout from './component/baselayout/baselayout';
 import register from './register/register';
 import profile from './component/profile/profile';
+import coursecontainer from './component/coursecontainer/coursecontainer';
 const defaultStore = store
 const main = <Provider store={defaultStore}>
     <Router>
         <div className="container">        
             <BaseLayout exact path="/" component={home} />
-            <BaseLayout path="/profile" component={profile} />
+            <BaseLayout exact path="/profile" component={profile} />
+            <BaseLayout path="/profile/courses" component={coursecontainer} />
             <Route path="/login" component={login} />
             <Route path="/register" component={register} />
         </div>

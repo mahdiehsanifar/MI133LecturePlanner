@@ -11,6 +11,8 @@ module.exports = app => {
     const validator = app.models.viewmodels.authentication.RegisterValidationViewModel;
     app.post("/authentication/token", (req, res) => {
         if (req.body.email && req.body.password) {
+            console.log("========================")
+            console.log(req.body)
             const email = req.body.email;
             const password = req.body.password;
             //console.log("request arrived")
