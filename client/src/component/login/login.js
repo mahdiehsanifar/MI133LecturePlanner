@@ -34,7 +34,7 @@ class Login extends Component {
             </label>
           </div>
           <button className="btn btn-lg btn-primary btn-block" onClick={(e) => this.login(e)} >Sign in</button>
-          <Link className="btn btn-lg btn-primary btn-block" to={"/register"} activeClassName="active">Register</Link>
+          <Link className="btn btn-lg btn-primary btn-block" to={"/register"} activeclassname="active">Register</Link>
 
           <p className="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
         </form>

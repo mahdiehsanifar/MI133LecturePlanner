@@ -12,11 +12,13 @@ import login from './component/login/login';
 import './component/NavigationBar/NavigationBar.css';
 import BaseLayout from './component/baselayout/baselayout';
 import register from './register/register';
+import profile from './component/profile/profile';
 const defaultStore = store
 const main = <Provider store={defaultStore}>
     <Router>
         <div className="container">        
             <BaseLayout exact path="/" component={home} />
+            <BaseLayout path="/profile" component={profile} />
             <Route path="/login" component={login} />
             <Route path="/register" component={register} />
         </div>

@@ -11,6 +11,14 @@ export const loginReducer = (state = {
                 email: action.payload.email,
                 token: action.payload.token
             })
+        case actiontypes.UPDATE_PROFILE_INFO:        
+            return Object.assign({}, state, {
+                firstname: action.payload.firstname,
+                lastname: action.payload.lastname,
+                city: action.payload.city,
+                postalcode: action.payload.postalcode,
+                phone: action.payload.phone
+            })
         case actiontypes.LOGIN_BEGIN_HTTP_REQ:
         return Object.assign({}, state, {
             request_status: true          
