@@ -4,7 +4,8 @@ import { l } from '../../utility/log-helper';
 
 export const loginReducer = (state = {
     request_status: false,
-    courses: []
+    courses: [],
+    locations: []
 }, action) => {
     switch (action.type) {
         case actiontypes.LOGIN_UPDATE_TOKEN_INFO:
@@ -22,8 +23,8 @@ export const loginReducer = (state = {
             })
         case actiontypes.PROFILE_COURSES_INFO:
             const g = action.payload
-            return Object.assign({}, state,
-                {
+            return Object.assign({}, state, {
+                
                     courses: action.payload.filter(group => group.Row != null)
                         .map(group => {
                             return {
@@ -40,8 +41,15 @@ export const loginReducer = (state = {
                                     })
                             }
                         })
-                }
+                    }
+                
             )
+        case actiontypes.UPDATE_LOCATION_INFO:            
+            return Object.assign({}, state,
+                {
+                locations: action.payload
+                }                
+            )            
         case actiontypes.LOGIN_BEGIN_HTTP_REQ:
             return Object.assign({}, state, {
                 request_status: true
@@ -49,6 +57,10 @@ export const loginReducer = (state = {
         case actiontypes.LOGIN_END_HTTP_REQ:
             return Object.assign({}, state, {
                 request_status: false
+            })
+        case actiontypes.RESET_LOCATIONS:
+            return Object.assign({}, state, {
+                locations: []
             })
         default:
             return state;

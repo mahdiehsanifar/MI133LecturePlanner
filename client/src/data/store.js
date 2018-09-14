@@ -11,10 +11,20 @@ import { loginReducer } from './reducers/login-reducer';
 const enhancer = compose(applyMiddleware(thunk)
     , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
+let token = ''
+if(localStorage.getItem('token'))
+    token = localStorage.getItem('token')
+
 export const store = createStore(combineReducers({
     profile: loginReducer,
     test: reducers.deafultReducer
-}), {}, enhancer)
+}), {
+    profile: {
+        token: token,
+        courses: [],
+        locations: []
+    }
+}, enhancer)
 
 export const test = (store) => {
     store.dispatch(actions.test({

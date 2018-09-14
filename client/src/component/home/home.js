@@ -20,7 +20,7 @@ class Home extends Component {
             <div className="container">
               <h1 className="display-3">Lecture Planner!</h1>
               <p>This website is provided students of Kiel University with ...</p>
-              <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+              <p><a className="btn btn-primary btn-lg" href="#" role="button" disabled>Learn more &raquo;</a></p>
             </div>
           </div>
 
@@ -28,19 +28,19 @@ class Home extends Component {
 
             <div className="row">
               <div className="col-md-4">
-                <h2>Navigate to lecture</h2>                
-                <p>Select your lecture and search for possible public transportation paths to there  </p>
-                <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                <h2>Browse Lectures</h2>                
+                <p>You can see all the lectures being pffered by CAU University</p>
+                {/* <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> */}
               </div>
               <div className="col-md-4">
-                <h2>Favorites</h2>
-                <p>Save lectures you search regularly </p>
-                <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                <h2>Best Route! FTW</h2>
+                <p>This application is able to find the best bus route for you to attend your class as soon as you cant even imagine it!</p>
+                {/* <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> */}
               </div>
               <div className="col-md-4">
                 <h2>Manage profile</h2>
-                <p>Edit your profile details. </p>
-                <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                <p>OH, what a briliant feature, yes you can edit your profile as well</p>
+                {/* <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> */}
               </div>
             </div>
             

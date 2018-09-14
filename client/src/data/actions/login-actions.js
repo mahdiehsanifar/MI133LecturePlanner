@@ -1,7 +1,13 @@
 import * as actiontypes from "./action-types"
 
 import axios from 'axios'
-import { LOGIN_PATH, REGISTER_PATH, PROFILE_PATH, COURSE_PATH } from '../../utility/endpoints';
+import {
+    LOGIN_PATH,
+    REGISTER_PATH,
+    PROFILE_PATH,
+    COURSE_PATH,
+    LOCATIONS_PATH
+} from '../../utility/endpoints';
 
 
 
@@ -30,6 +36,12 @@ export const updateCoursesInfo = (payload) => {
         payload: payload
     }
 }
+export const updateLocationInfo = (payload) => {
+    return {
+        type: actiontypes.UPDATE_LOCATION_INFO,
+        payload: payload
+    }
+}
 export const endHttpReq = () => {
     return {
         type: actiontypes.LOGIN_END_HTTP_REQ
@@ -40,6 +52,15 @@ export const errorHttpReq = () => {
         type: actiontypes.LOGIN_ERROR_HTTP_REQ
     }
 }
+
+export const resetLocations = () => {
+    return ds =>
+        ds({
+            type: actiontypes.RESET_LOCATIONS
+        })
+}
+
+
 
 export const loginApi = (email, password, extra) => {
     return ds => {
@@ -156,5 +177,27 @@ export const getCoursesApi = () => {
 
     }
 }
+export const getLocationApi = (lat, long) => {
+    return ds => {
+        ds(beginHttpReq())
+        axios.get(`${LOCATIONS_PATH}?lat=${lat}&long=${long}`)
+            .then(response => {                
+                ds(endHttpReq())                
+                if (response.status == 200) {
+                    ds(updateLocationInfo(response.data.data))
+                }
+            })
+            .catch(error => {
+                ds(errorHttpReq())
+                ds(endHttpReq())
+                console.log(error)
+            })
+
+    }
+}
+
+
+
+
 
 //profileUpdate

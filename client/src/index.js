@@ -14,13 +14,17 @@ import BaseLayout from './component/baselayout/baselayout';
 import register from './register/register';
 import profile from './component/profile/profile';
 import coursecontainer from './component/coursecontainer/coursecontainer';
+import location from './component/location/location';
+import path from './component/path/path';
 const defaultStore = store
 const main = <Provider store={defaultStore}>
     <Router>
         <div className="container">        
             <BaseLayout exact path="/" component={home} />
             <BaseLayout exact path="/profile" component={profile} />
-            <BaseLayout path="/profile/courses" component={coursecontainer} />
+            <BaseLayout exact path="/profile/courses" component={coursecontainer} />
+            <BaseLayout exact path="/profile/locations" component={location} />
+            <BaseLayout exact path="/profile/locations/path" component={path} />
             <Route path="/login" component={login} />
             <Route path="/register" component={register} />
         </div>
